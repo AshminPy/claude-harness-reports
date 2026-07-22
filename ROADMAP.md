@@ -51,6 +51,22 @@ Final regression state: 36/36 deterministic tests pass, 143/143 destructive-comm
 classification tests pass, `harness_check.sh` PASS — all re-verified at the end of
 every phase in this run, not just at the start.
 
+### Final closure pass (`FINAL_CLOSURE_VERIFICATION.md`)
+- [x] Fresh-session verification: `automation-reviewer` confirmed dispatchable and
+  correct after a session reload.
+- [x] Live routing smoke tests: AWS, Kubernetes, and cloud-architecture reviews all
+  independently live-dispatched against synthetic fixtures — correct agent, correct
+  format, evidence-cited findings in all 3.
+- [x] Context-size decision: **B — kept at 357 lines, justified** (one genuine
+  duplication removed between `behavior.md`/`security.md`, line-neutral; no further
+  safe reduction found without real content loss).
+- [x] Corrected evidence-trust wording in 2 places to state plainly it is
+  workflow-integrity protection, not cryptographic/adversarial-proof.
+
+**Final verdict: READY FOR DAILY PROJECT WORK — VERIFIED IN A FRESH SESSION.**
+**Harness frozen.** Next work is real AWS/GCP/Kubernetes/Terraform/automation/homelab/
+AI-agent projects, not further harness improvement.
+
 ## Not on this roadmap (see `HARNESS_BACKLOG.md` instead)
 
 Nothing further is planned by default. The explicit goal was to reach a stable,

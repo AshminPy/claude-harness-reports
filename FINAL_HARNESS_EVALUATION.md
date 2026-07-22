@@ -146,16 +146,17 @@ No other defects found across the 12 scenarios.
 
 ## Remaining limitations
 
-- `automation-reviewer` will not be dispatchable as a named subagent type until a new
-  session starts (expected to resolve automatically then, since the file is correctly
-  installed — not verified in a fresh session as part of this evaluation, since doing
-  so requires ending this one).
-- Scenarios 4, 6, 8 (AWS, Kubernetes, architecture) were evaluated by routing-table
-  trace plus extrapolation from a sibling agent's live result (scenario 7's
-  `terraform-reviewer` test), not independently live-dispatched this phase — reasonable
-  given `terraform-reviewer`/`kubernetes-reviewer`/`cloud-architect-reviewer` share the
-  same agent-definition pattern and output convention, but not identical to having
-  tested each one directly.
+- ~~`automation-reviewer` will not be dispatchable as a named subagent type until a new
+  session starts~~ — **UPDATE (see `FINAL_CLOSURE_VERIFICATION.md`):** verified after
+  a session reload — it dispatches correctly as a named agent type, follows its exact
+  output contract, and correctly identified all planted issues in a fresh test fixture.
+- ~~Scenarios 4, 6, 8 (AWS, Kubernetes, architecture) were evaluated by routing-table
+  trace... not independently live-dispatched~~ — **UPDATE:** all three were
+  independently live-dispatched in the closure pass (`FINAL_CLOSURE_VERIFICATION.md`
+  §2) against dedicated synthetic fixtures (public S3 bucket + wildcard IAM for AWS,
+  a Deployment with no resource limits/security context/probes for Kubernetes, a
+  single-AZ/no-backup/plaintext-credential design doc for architecture) — all three
+  produced correct agent selection, correct output format, and evidence-cited findings.
 - This evaluation suite is not automated/repeatable as code (unlike
   `test_reliability_fixes.py`) — it is a one-time evidence-gathering pass. Future
   re-evaluation would need to re-run the same live dispatches, not just re-read this
@@ -189,11 +190,12 @@ No other defects found across the 12 scenarios.
 
 ## Final readiness verdict
 
-**READY FOR DAILY PROJECT WORK**
+**READY FOR DAILY PROJECT WORK — VERIFIED IN A FRESH SESSION**
 
 All 36 deterministic regression tests pass, the 143-case destructive-command suite is
-unchanged, two independent live subagent dispatches (one pre-existing, one newly
-added this run) produced correct, evidence-cited, non-hallucinated findings against
-deliberately flawed fixtures, and the one defect found (new-agent dispatch
-availability) is a session-boundary characteristic with a known, simple workaround
-(start a new session), not a blocker to using the harness for real work today.
+unchanged, and — per the closure pass in `FINAL_CLOSURE_VERIFICATION.md` — every
+remaining verification gap from this report has since been closed with real evidence:
+`automation-reviewer` confirmed dispatchable and correct after a session reload, and
+AWS/Kubernetes/architecture reviews all independently live-tested (not just
+routing-table-traced) with correct agent selection, correct output format, and
+evidence-cited findings in every case.
