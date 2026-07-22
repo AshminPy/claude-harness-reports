@@ -8,6 +8,11 @@ repo itself.
 
 ## Reading order
 
+0. **[HARNESS_GUIDE.md](HARNESS_GUIDE.md)** — **start here.** The canonical reference:
+   architecture, how it works, update/rollback procedure, skill architecture, rule
+   hierarchy, how to add a skill, how to debug problems, known limitations, and design
+   principles. Everything below is historical record of how it got built and verified;
+   this is the one doc to read for the current state.
 1. **[HARNESS_RELIABILITY_AUDIT.md](HARNESS_RELIABILITY_AUDIT.md)** — the original
    audit: 25 reliability controls + 16 "Karpathy-inspired" checks, evidence-backed,
    with live behavioral tests (including a proof that fabricated evidence could pass
